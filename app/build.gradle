@@ -1,6 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
+
+    dataBinding {
+        enabled true
+    }
+
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
@@ -17,11 +23,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors {
+        dev {
+            buildConfigField "String", "API_BASE_URI", '"https://api.github.com/"'
+            resValue "string", "app_name", "RetrofitAndRxjava-dev"
+            applicationId 'com.dwgg.retrofitandrxjava.dev'
+        }
+        product {
+            buildConfigField "String", "API_BASE_URI", '"https://api.github.com/"'
+            resValue "string", "app_name", "RetrofitAndRxjava"
+        }
+    }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
+
 
     // Android dependencies.
     compile rootProject.ext.supportV7_appcompat
@@ -30,10 +49,11 @@ dependencies {
     compile rootProject.ext.retrofit
     compile rootProject.ext.retrofit_converterGson
     compile rootProject.ext.retrofit_adapterRxjava
+    compile rootProject.ext.okhttp3_logging
 
-    // Rx dependencies. rxBinding已经依赖rxAndroid, rxAndroid已经依赖rxjava
-    compile rootProject.ext.rxBinding
-    
+    // Rx dependencies
+    compile rootProject.ext.rxlifecycle_components
+
     // Third-party dependencies.
     compile rootProject.ext.timber
 
