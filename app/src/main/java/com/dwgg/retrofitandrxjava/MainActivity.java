@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.dwgg.retrofitandrxjava.databinding.ActivityMainBinding;
+import com.dwgg.retrofitandrxjava.utils.Tools;
+
+import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Timber.tag(Tools.defaultTag(MainActivity.class));
 
         //简单用一下data binding, 实在不想findViewById
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
@@ -22,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClick2Get(View view) {
+        Timber.d("click 2 get");
         startActivity(new Intent(this, GetActivity.class));
     }
 }

@@ -16,6 +16,7 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 public class GetActivity extends RxAppCompatActivity {
 
@@ -25,6 +26,8 @@ public class GetActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Timber.tag(Tools.defaultTag(GetActivity.class));
+
         vmData = new GetVM();
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_get);
