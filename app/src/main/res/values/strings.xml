@@ -1,6 +1,7 @@
 <resources>
     <string name="hello">hello...</string>
     <string name="title_activity_get">\@GET 和 @Path</string>
+    <string name="title_activity_leaky">Leak Memory</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

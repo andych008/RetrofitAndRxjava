@@ -3,9 +3,10 @@
 
     <data>
 
+
         <variable
             name="listener"
-            type="com.dwgg.retrofitandrxjava.MainActivity"/>
+            type="com.dwgg.retrofitandrxjava.LeakyActivity"/>
     </data>
 
     <ScrollView
@@ -22,14 +23,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick2Leaky}"
-                android:text="@string/title_activity_leaky"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick2Get}"
-                android:text="@string/title_activity_get"/>
+                android:onClick="@{listener.onClick}"
+                android:text="get userInfo"/>
         </LinearLayout>
 
     </ScrollView>

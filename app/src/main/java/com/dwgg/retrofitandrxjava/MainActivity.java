@@ -25,6 +25,11 @@ public class MainActivity extends AppCompatActivity {
         binding.setListener(this);
     }
 
+    public void onClick2Leaky(View view) {
+        Timber.d("click 2 leaky");
+        startActivity(new Intent(this, LeakyActivity.class));
+    }
+
     public void onClick2Get(View view) {
         Timber.d("click 2 get");
         startActivity(new Intent(this, GetActivity.class));
