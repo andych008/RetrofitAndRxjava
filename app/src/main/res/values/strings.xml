@@ -2,6 +2,8 @@
     <string name="hello">hello...</string>
     <string name="title_activity_get">\@GET 和 @Path</string>
     <string name="title_activity_leaky">Leak Memory</string>
+    <string name="leak_in_inner_class">leak in inner class</string>
+    <string name="leak_in_inner_subscriber">leak in Subscriber</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

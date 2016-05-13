@@ -23,8 +23,15 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick}"
-                android:text="get userInfo"/>
+                android:onClick="@{listener.onClick1}"
+                android:text="@string/leak_in_inner_class"/>
+
+            <Button
+                android:textAllCaps="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{listener.onClick2}"
+                android:text="@string/leak_in_inner_subscriber"/>
         </LinearLayout>
 
     </ScrollView>
