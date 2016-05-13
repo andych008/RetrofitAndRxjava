@@ -6,6 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textAppearanceButton">@style/CustomTheme.ButtonTextAppearance</item>
+    </style>
+
+    <!-- AppCompat.Button -->
+    <style name="CustomTheme.ButtonTextAppearance" parent="Base.TextAppearance.AppCompat.Button">
+        <item name="android:textAllCaps">false</item>
     </style>
 
 </resources>
