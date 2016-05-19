@@ -25,15 +25,19 @@
 	- `@FormUrlEncoded`的使用（用来**提交form表单**数据）
 	- `@Multipart`的使用（用来**上传文件**）
 
-1. 怎么样低碳环保地显示**加载中...**？（见[GetActivity](app/src/main/java/com/dwgg/retrofitandrxjava/GetActivity.java)中
+1. 怎么样低碳环保地显示**加载中...**？
+
+	见[GetActivity](app/src/main/java/com/dwgg/retrofitandrxjava/GetActivity.java)
 
 	`.compose(RxUtils.<GitHubUser>showLoading(GetActivity.this))`
 
-	此Demo中在GetActivity里实现了接口类`ILoading`）
+	作为Demo我只是在GetActivity里实现了接口类`ILoading`。实际的项目中，你可能会有一个基类BaseActivity里实现，当然，也会有别的方式）
 
 1. 网络加载的数据在显示之后有一些公用的**数据正确性检查**，这个要怎么写？
 
-1. **Interceptor拦截器**都能干什么，哪些事情用它做会很低碳环保？（直接说答案吧。比如，给每个请求加自定义header） 
+1. **Interceptor拦截器**都能干什么，哪些事情用它做会很低碳环保？
+
+	直接说答案吧。比如，给每个请求加自定义header
 
 1. **Converter转换器**的使用
 
