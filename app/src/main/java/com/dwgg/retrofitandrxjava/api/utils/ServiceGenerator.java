@@ -1,7 +1,5 @@
 package com.dwgg.retrofitandrxjava.api.utils;
 
-import android.util.Log;
-
 import com.dwgg.retrofitandrxjava.BuildConfig;
 
 import okhttp3.OkHttpClient;
@@ -9,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import timber.log.Timber;
 
 
 /**
@@ -31,8 +30,12 @@ public class ServiceGenerator {
             HttpLoggingInterceptor.Logger logger = new HttpLoggingInterceptor.Logger() {
                 @Override
                 public void log(String message) {
-                    //这里你可以用你喜欢的日志工具库（比如Timber）
-                    Log.i("HttpLogging", message);
+//                    //直接用Log.i打日志
+//                    Log.i("HttpLogging", message);
+
+                    //这里你也可以用你喜欢的日志工具库（比如Timber）
+                    Timber.tag("HttpLogging");
+                    Timber.i(message);
                 }
             };
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor(logger);
