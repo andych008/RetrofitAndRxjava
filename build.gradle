@@ -52,7 +52,6 @@ ext {
     rxlifecycle_components = 'com.trello:rxlifecycle-components:0.5.0'
 
     // Third-party dependencies.
-    slf4j_timber = 'com.arcao:slf4j-timber:2.1'
     timber = 'com.jakewharton.timber:timber:4.1.2'
     ormlite = 'com.j256.ormlite:ormlite-android:4.48'
 }

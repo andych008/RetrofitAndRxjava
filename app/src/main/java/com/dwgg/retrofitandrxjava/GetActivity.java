@@ -8,17 +8,17 @@ import com.dwgg.retrofitandrxjava.api.GitHubService;
 import com.dwgg.retrofitandrxjava.api.entity.GitHubUser;
 import com.dwgg.retrofitandrxjava.api.utils.ServiceGenerator;
 import com.dwgg.retrofitandrxjava.databinding.ActivityGetBinding;
+import com.dwgg.retrofitandrxjava.utils.RxUtils;
 import com.dwgg.retrofitandrxjava.utils.Tools;
 import com.dwgg.retrofitandrxjava.utils.ViewUtil;
 import com.dwgg.retrofitandrxjava.vmdata.GetVM;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class GetActivity extends RxAppCompatActivity {
+public class GetActivity extends RxAppCompatActivity implements RxUtils.ILoading {
 
     private ActivityGetBinding binding;
     private GetVM vmData;
@@ -26,7 +26,6 @@ public class GetActivity extends RxAppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Timber.tag(Tools.defaultTag(GetActivity.class));
 
         vmData = new GetVM();
 
@@ -40,12 +39,13 @@ public class GetActivity extends RxAppCompatActivity {
     }
 
     public void onClick(View view) {
+        vmData.clear();
 
         ServiceGenerator.createService(GitHubService.class)
                 .getUser(ViewUtil.getEditText(binding.username))
                 .compose(this.<GitHubUser>bindToLifecycle())
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .compose(RxUtils.<GitHubUser>showLoading(GetActivity.this))
                 .subscribe(new Subscriber<GitHubUser>() {
                     @Override
                     public void onCompleted() {
@@ -63,5 +63,18 @@ public class GetActivity extends RxAppCompatActivity {
                         vmData.setText(gitHubUser.toString());
                     }
                 });
+
+    }
+
+    @Override
+    public void showLoading(String tip) {
+        Timber.d("thread of showLoading = %s", Thread.currentThread().getName());
+        Tools.toast(this, tip);
+    }
+
+    @Override
+    public void hideLoading() {
+        Timber.d("thread of hideLoading =  %s", Thread.currentThread().getName());
+        Tools.toast(this, "over.");
     }
 }

@@ -69,6 +69,6 @@ dependencies {
     compile rootProject.ext.rxlifecycle_components
 
     // Third-party dependencies.
-    compile rootProject.ext.slf4j_timber
+    compile rootProject.ext.timber
 
 }

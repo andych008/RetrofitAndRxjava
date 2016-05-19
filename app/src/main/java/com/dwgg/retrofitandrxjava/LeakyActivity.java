@@ -7,19 +7,16 @@ import android.view.View;
 import com.dwgg.retrofitandrxjava.databinding.ActivityLeakyBinding;
 import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
+import timber.log.Timber;
 
 public class LeakyActivity extends RxAppCompatActivity {
     private List<String> list = new ArrayList<>();
-    private final Logger logger = LoggerFactory.getLogger(LeakyActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +34,7 @@ public class LeakyActivity extends RxAppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        logger.debug("destroy");
+        Timber.d("destroy");
     }
 
     public void onClick1(View view) {
@@ -57,12 +54,12 @@ public class LeakyActivity extends RxAppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Timber.e(e.getMessage());
                     }
 
                     @Override
                     public void onNext(Long aLong) {
-                        logger.debug("aLong = {}", aLong);
+                        Timber.d("aLong = %s", aLong);
                     }
                 });
     }
@@ -73,7 +70,7 @@ public class LeakyActivity extends RxAppCompatActivity {
         @Override
         public void run() {
             super.run();
-            logger.debug("running...{}", i++);
+            Timber.d("running... %d", i++);
 
             //模拟耗时操作
             try {

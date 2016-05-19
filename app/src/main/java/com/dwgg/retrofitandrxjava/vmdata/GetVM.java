@@ -22,4 +22,9 @@ public class GetVM extends BaseObservable{
         this.text = text;
         notifyPropertyChanged(BR.text);
     }
+
+    public void clear() {
+        this.text = "";
+        notifyChange();
+    }
 }
