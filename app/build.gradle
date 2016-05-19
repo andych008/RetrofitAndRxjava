@@ -17,10 +17,24 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    signingConfigs {
+        config {
+            keyAlias 'dwgg_git'
+            keyPassword '123456'
+            storeFile file('dwgg_git.jks')
+            storePassword '123456'
+        }
+    }
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
 
