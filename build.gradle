@@ -38,10 +38,10 @@ ext {
     daggerCompiler = 'com.squareup.dagger:dagger-compiler:1.2.2'
     leakcanary_debug = 'com.squareup.leakcanary:leakcanary-android:1.3.1'
     leakcanary_release = 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
-    retrofit = 'com.squareup.retrofit2:retrofit:2.0.0'
-    retrofit_converterGson = 'com.squareup.retrofit2:converter-gson:2.0.0'
-    retrofit_adapterRxjava = 'com.squareup.retrofit2:adapter-rxjava:2.0.0'
-    okhttp3_logging = 'com.squareup.okhttp3:logging-interceptor:3.0.1'
+    retrofit = 'com.squareup.retrofit2:retrofit:2.0.2'
+    retrofit_converterGson = 'com.squareup.retrofit2:converter-gson:2.0.2'
+    retrofit_adapterRxjava = 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
+    okhttp3_logging = 'com.squareup.okhttp3:logging-interceptor:3.2.0'
 
     // Rx dependencies.
     rxJava = 'io.reactivex:rxjava:1.1.0'
@@ -50,6 +50,10 @@ ext {
     rxBinding = 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     rxBinding_appcompat = 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
     rxlifecycle_components = 'com.trello:rxlifecycle-components:0.5.0'
+
+    // FB
+    stetho = 'com.facebook.stetho:stetho:1.3.1'
+    stetho_ok = 'com.facebook.stetho:stetho-okhttp3:1.3.1'
 
     // Third-party dependencies.
     timber = 'com.jakewharton.timber:timber:4.1.2'

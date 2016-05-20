@@ -27,7 +27,7 @@
 
 1. 怎么样低碳环保地显示**加载中...**？
 
-	见[GetActivity](app/src/main/java/com/dwgg/retrofitandrxjava/GetActivity.java)
+	见[GetActivity](app/src/main/java/com/dwgg/retrofitandrxjava/GetActivity.java)，通过compose来实现代码复用，这算是rxjava的小技巧。后面会详细介绍rxjava。
 
 	`.compose(RxUtils.<GitHubUser>showLoading(GetActivity.this))`
 
@@ -37,7 +37,17 @@
 
 1. **Interceptor拦截器**都能干什么，哪些事情用它做会很低碳环保？
 
-	直接说答案吧。比如，给每个请求加自定义header
+	直接说答案吧。比如，给每个请求加自定义header。见[MyInterceptor](app/src/main/java/com/dwgg/retrofitandrxjava/api/MyInterceptor.java)
+
+	```
+	//这里加了app的版本号，常见的可能还会加user-token之类的，都在这里加。顺便自己去看一下header()和addHeader()的区别，也许你在开发中用到。
+	@Override
+	public Response intercept(Chain chain) throws IOException {
+	    Request request = chain.request();
+	    request = request.newBuilder().header("App-Version", Tools.getVersionName()).build();
+	    return chain.proceed(request);
+	}
+	```
 
 1. **Converter转换器**的使用
 

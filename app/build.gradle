@@ -68,6 +68,10 @@ dependencies {
     // Rx dependencies
     compile rootProject.ext.rxlifecycle_components
 
+    // FB
+    compile rootProject.ext.stetho
+    compile rootProject.ext.stetho_ok
+
     // Third-party dependencies.
     compile rootProject.ext.timber
 
