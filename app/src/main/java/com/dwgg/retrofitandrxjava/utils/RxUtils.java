@@ -1,9 +1,14 @@
 package com.dwgg.retrofitandrxjava.utils;
 
 
+import android.content.Context;
+
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Rx工具类
@@ -60,4 +65,24 @@ public class RxUtils {
         };
     }
 
+    public static <T> Observable.Transformer<T, T> validateGitHubResponse(final Context context) {
+        return new Observable.Transformer<T, T>() {
+            @Override
+            public Observable<T> call(Observable<T> observable) {
+                return observable.observeOn(Schedulers.io()).doOnError(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Timber.d("log : %s", Thread.currentThread().getName());
+                        Timber.e(throwable, throwable.getMessage());
+                    }
+                }).observeOn(AndroidSchedulers.mainThread()).doOnError(new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Timber.d("toast : %s", Thread.currentThread().getName());
+                        Tools.toast(context, throwable.getMessage());
+                    }
+                });
+            }
+        };
+    }
 }

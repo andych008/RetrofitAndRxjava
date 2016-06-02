@@ -27,11 +27,11 @@
 
 1. 怎么样低碳环保地显示**加载中...**？
 
-	见[GetActivity](app/src/main/java/com/dwgg/retrofitandrxjava/GetActivity.java)，通过compose来实现代码复用，这算是rxjava的小技巧。后面会详细介绍rxjava。
+	见[BetterGetActivity](app/src/main/java/com/dwgg/retrofitandrxjava/BetterGetActivity.java)，通过compose来实现代码复用，这算是rxjava的小技巧。后面会详细介绍rxjava。
 
-	`.compose(RxUtils.<GitHubUser>showLoading(GetActivity.this))`
+	`.compose(RxUtils.<GitHubUser>showLoading(BetterGetActivity.this))`
 
-	作为Demo我只是在GetActivity里实现了接口类`ILoading`。实际的项目中，你可能会有一个基类BaseActivity里实现，当然，也会有别的方式）
+	作为Demo我只是在BetterGetActivity里实现了接口类`ILoading`。实际的项目中，你可能会有一个基类BaseActivity里实现，当然，也会有别的方式）
 
 1. 网络加载的数据在显示之后有一些公用的**数据正确性检查**，这个要怎么写？
 

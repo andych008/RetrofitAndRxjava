@@ -30,6 +30,10 @@
             android:name=".GetActivity"
             android:label="@string/title_activity_get">
         </activity>
+        <activity
+            android:name=".BetterGetActivity"
+            android:label="@string/title_activity_get">
+        </activity>
     </application>
 
 </manifest>

@@ -32,4 +32,9 @@ public class MainActivity extends AppCompatActivity {
         Timber.d("click 2 get");
         startActivity(new Intent(this, GetActivity.class));
     }
+
+    public void onClick2BetterGet(View view) {
+        Timber.d("click 2 better get");
+        startActivity(new Intent(this, BetterGetActivity.class));
+    }
 }
