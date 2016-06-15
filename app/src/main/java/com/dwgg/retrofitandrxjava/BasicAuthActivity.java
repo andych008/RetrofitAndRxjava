@@ -2,15 +2,21 @@ package com.dwgg.retrofitandrxjava;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.dwgg.retrofitandrxjava.api.GitHubService;
+import com.dwgg.retrofitandrxjava.api.MySubscriber;
+import com.dwgg.retrofitandrxjava.api.entity.GitHubUser;
+import com.dwgg.retrofitandrxjava.api.utils.BasicAuthServiceGenerator;
 import com.dwgg.retrofitandrxjava.databinding.ActivityBasicAuthBinding;
 import com.dwgg.retrofitandrxjava.listener.IBasicAuthListener;
+import com.dwgg.retrofitandrxjava.utils.RxUtils;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class BasicAuthActivity extends AppCompatActivity {
+public class BasicAuthActivity extends RxAppCompatActivity {
 
 
     private ActivityBasicAuthBinding binding;
@@ -36,5 +42,17 @@ public class BasicAuthActivity extends AppCompatActivity {
 
     private void demo1(){
 
+        // FIXME: use your owen username and password
+        BasicAuthServiceGenerator.createService(GitHubService.class, "JakeWharton", "xxxxxx")
+                .testBasicAuth()
+                .compose(this.<GitHubUser>bindToLifecycle())
+                .compose(RxUtils.<GitHubUser>validateGitHubResponse(this))
+                .subscribeOn(Schedulers.io())
+                .subscribe(new MySubscriber<GitHubUser>() {
+                    @Override
+                    public void onNext(GitHubUser gitHubUser) {
+                        Timber.i(gitHubUser.toString());
+                    }
+                });
     }
 }

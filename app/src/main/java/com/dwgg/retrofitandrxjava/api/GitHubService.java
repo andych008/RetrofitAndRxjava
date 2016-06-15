@@ -10,4 +10,7 @@ import rx.Observable;
 public interface GitHubService {
     @GET("users/{username}")
     Observable<GitHubUser> getUser(@Path("username") String username);
+
+    @GET("user")
+    Observable<GitHubUser> testBasicAuth();
 }
