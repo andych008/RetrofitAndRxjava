@@ -1,4 +1,4 @@
-package com.dwgg.retrofitandrxjava.api;
+package com.dwgg.retrofitandrxjava.api.interceptor;
 
 import com.dwgg.retrofitandrxjava.utils.Tools;
 

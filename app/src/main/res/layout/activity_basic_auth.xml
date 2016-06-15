@@ -5,7 +5,7 @@
 
         <variable
             name="listener"
-            type="com.dwgg.retrofitandrxjava.MainActivity"/>
+            type="com.dwgg.retrofitandrxjava.listener.IBasicAuthListener"/>
     </data>
 
     <ScrollView
@@ -22,26 +22,14 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick2Leaky}"
-                android:text="@string/title_activity_leaky"/>
+                android:onClick="@{listener.onClickBtn1}"
+                android:text="btn1"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick2Get}"
-                android:text="@string/title_activity_get"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick2BetterGet}"
-                android:text="better get"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="@{listener.onClick2BasicAuth}"
-                android:text="@string/title_activity_basic_auth"/>
+                android:onClick="@{listener.onClickBtn2}"
+                android:text="btn2"/>
         </LinearLayout>
 
     </ScrollView>

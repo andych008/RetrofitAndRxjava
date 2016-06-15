@@ -23,6 +23,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".BasicAuthActivity"
+            android:label="@string/title_activity_basic_auth">
+        </activity>
+        <activity
             android:name=".LeakyActivity"
             android:label="@string/title_activity_leaky">
         </activity>

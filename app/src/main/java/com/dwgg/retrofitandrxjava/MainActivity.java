@@ -37,4 +37,9 @@ public class MainActivity extends AppCompatActivity {
         Timber.d("click 2 better get");
         startActivity(new Intent(this, BetterGetActivity.class));
     }
+
+    public void onClick2BasicAuth(View view) {
+        Timber.d("click 2 basic auth");
+        startActivity(new Intent(this, BasicAuthActivity.class));
+    }
 }
