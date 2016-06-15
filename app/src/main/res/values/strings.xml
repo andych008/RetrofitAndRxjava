@@ -1,5 +1,7 @@
 <resources>
     <string name="hello">hello...</string>
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
     <string name="title_activity_get">\@GET 和 @Path</string>
     <string name="title_activity_leaky">Leak Memory</string>
     <string name="leak_in_inner_class">leak in inner class</string>
