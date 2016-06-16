@@ -19,6 +19,12 @@ import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
+/**
+ * <p>
+ * See <a href="https://developer.github.com/v3/auth/#basic-authentication">github basic-authentication</a> for detailed
+ * <p>
+ * See <a href="http://stackoverflow.com/questions/3406534/password-hint-font-in-android">password-hint-font-in-android</a>
+ */
 public class BasicAuthActivity extends RxAppCompatActivity {
 
 
@@ -37,9 +43,6 @@ public class BasicAuthActivity extends RxAppCompatActivity {
             }
         });
 
-        /**
-         * @see http://stackoverflow.com/questions/3406534/password-hint-font-in-android
-         */
         binding.password.setTypeface(Typeface.DEFAULT);
         binding.password.setTransformationMethod(new PasswordTransformationMethod());
     }
