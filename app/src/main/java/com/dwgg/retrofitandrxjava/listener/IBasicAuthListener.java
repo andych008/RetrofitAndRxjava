@@ -10,6 +10,4 @@ import android.view.View;
 public interface IBasicAuthListener {
 
     void onClickBtn1(View view);
-
-    void onClickBtn2(View view);
 }
