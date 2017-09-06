@@ -62,6 +62,7 @@ dependencies {
     compile rootProject.ext.retrofit_adapterRxjava
     compile rootProject.ext.okhttp3_logging
     // Rx dependencies
+    compile rootProject.ext.rxJava
     compile rootProject.ext.rxlifecycle_components
 
     // FB
