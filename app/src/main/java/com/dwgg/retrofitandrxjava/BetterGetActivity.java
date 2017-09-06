@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.dwgg.retrofitandrxjava.api.GitHubService;
-import com.dwgg.retrofitandrxjava.api.MySubscriber;
 import com.dwgg.retrofitandrxjava.api.entity.GitHubUser;
 import com.dwgg.retrofitandrxjava.api.utils.ServiceGenerator;
 import com.dwgg.retrofitandrxjava.databinding.ActivityGetBinding;
@@ -14,9 +13,10 @@ import com.dwgg.retrofitandrxjava.utils.RxUtils;
 import com.dwgg.retrofitandrxjava.utils.Tools;
 import com.dwgg.retrofitandrxjava.utils.ViewUtil;
 import com.dwgg.retrofitandrxjava.vmdata.GetVM;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
-import rx.schedulers.Schedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class BetterGetActivity extends RxAppCompatActivity implements ClickListener, RxUtils.ILoading {
@@ -49,9 +49,9 @@ public class BetterGetActivity extends RxAppCompatActivity implements ClickListe
                 .compose(RxUtils.<GitHubUser>validateGitHubResponse(this))
                 .subscribeOn(Schedulers.io())
                 .compose(RxUtils.<GitHubUser>showLoading(this))
-                .subscribe(new MySubscriber<GitHubUser>() {
+                .subscribe(new Consumer<GitHubUser>() {
                     @Override
-                    public void onNext(GitHubUser gitHubUser) {
+                    public void accept(GitHubUser gitHubUser) throws Exception {
                         vmData.setText(gitHubUser.toString());
                     }
                 });

@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.dwgg.retrofitandrxjava.R;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+
 
 /**
  * 常用工具方法
@@ -50,14 +52,14 @@ public class Tools {
     }
 
     public static Observable<Boolean> confirmOk(final Activity activity, final String text) {
-        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
-            public void call(final Subscriber<? super Boolean> subscriber) {
+            public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
                 showConfirmOk(activity, text, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        subscriber.onNext(true);
-                        subscriber.onCompleted();
+                        e.onNext(true);
+                        e.onComplete();
                         dialog.dismiss();
                     }
                 });
@@ -66,21 +68,21 @@ public class Tools {
     }
 
     public static Observable<Boolean> confirm(final Activity activity, final String text) {
-        return Observable.create(new Observable.OnSubscribe<Boolean>() {
+        return Observable.create(new ObservableOnSubscribe<Boolean>() {
             @Override
-            public void call(final Subscriber<? super Boolean> subscriber) {
+            public void subscribe(final ObservableEmitter<Boolean> e) throws Exception {
                 showConfirm(activity, text, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        subscriber.onNext(true);
-                        subscriber.onCompleted();
+                        e.onNext(true);
+                        e.onComplete();
                         dialog.dismiss();
                     }
                 }, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        subscriber.onNext(false);
-                        subscriber.onCompleted();
+                        e.onNext(false);
+                        e.onComplete();
                         dialog.dismiss();
                     }
                 });

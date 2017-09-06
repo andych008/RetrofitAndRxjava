@@ -10,7 +10,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -46,24 +46,38 @@ ext {
     daggerCompiler = 'com.squareup.dagger:dagger-compiler:1.2.2'
     leakcanary_debug = 'com.squareup.leakcanary:leakcanary-android:1.3.1'
     leakcanary_release = 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
-    retrofit = 'com.squareup.retrofit2:retrofit:2.0.2'
-    retrofit_converterGson = 'com.squareup.retrofit2:converter-gson:2.0.2'
-    retrofit_adapterRxjava = 'com.squareup.retrofit2:adapter-rxjava:2.0.2'
-    okhttp3_logging = 'com.squareup.okhttp3:logging-interceptor:3.2.0'
+    retrofit = 'com.squareup.retrofit2:retrofit:2.3.0'
+    retrofit_converterGson = 'com.squareup.retrofit2:converter-gson:2.3.0'
+    retrofit_adapterRxjava = 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    okhttp3_logging = 'com.squareup.okhttp3:logging-interceptor:3.9.0'
 
     // Rx dependencies.
-    rxJava = 'io.reactivex:rxjava:1.1.0'
-    rxAndroid = 'io.reactivex:rxandroid:1.1.0'
+    rxJava = 'io.reactivex.rxjava2:rxjava:2.1.3'
+    rxAndroid = 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //rxBinding已经依赖rxAndroid, rxAndroid已经依赖rxjava
-    rxBinding = 'com.jakewharton.rxbinding:rxbinding:0.4.0'
-    rxBinding_appcompat = 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:0.4.0'
-    rxlifecycle_components = 'com.trello:rxlifecycle-components:0.5.0'
+    //https://github.com/JakeWharton/RxBinding
+    rxBinding = 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    rxBinding_appcompat = 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0'
+    //https://github.com/trello/RxLifecycle
+    rxlifecycle_components = 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+
+//    compile 'com.trello.rxlifecycle2:rxlifecycle:2.1.0'
+//    // If you want to bind to Android-specific lifecycles
+//    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.1.0'
+//    // If you want pre-written Activities and Fragments you can subclass as providers
+//    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
+//    // If you want to use Navi for providers
+//    compile 'com.trello.rxlifecycle2:rxlifecycle-navi:2.1.0'
+//    // If you want to use Android Lifecycle for providers
+//    compile 'com.trello.rxlifecycle2:rxlifecycle-android-lifecycle:2.1.0'
+
+
 
     // FB
-    stetho = 'com.facebook.stetho:stetho:1.3.1'
-    stetho_ok = 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+    stetho = 'com.facebook.stetho:stetho:1.5.0'
+    stetho_ok = 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
     // Third-party dependencies.
-    timber = 'com.jakewharton.timber:timber:4.1.2'
+    timber = 'com.jakewharton.timber:timber:4.5.1'
     ormlite = 'com.j256.ormlite:ormlite-android:4.48'
 }

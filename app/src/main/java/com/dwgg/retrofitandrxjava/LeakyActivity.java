@@ -5,14 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.dwgg.retrofitandrxjava.databinding.ActivityLeakyBinding;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import rx.Observable;
-import rx.Subscriber;
+import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
 import timber.log.Timber;
 
 public class LeakyActivity extends RxAppCompatActivity {
@@ -46,20 +46,15 @@ public class LeakyActivity extends RxAppCompatActivity {
         //这样也会内存泄漏
         Observable.interval(1000, TimeUnit.MILLISECONDS)
 //                .compose(this.<Long>bindToLifecycle())//加上这个就不会泄漏了
-                .subscribe(new Subscriber<Long>() {
+                .subscribe(new Consumer<Long>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.e(e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(Long aLong) {
+                    public void accept(Long aLong) throws Exception {
                         Timber.d("aLong = %s", aLong);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Timber.e(throwable.getMessage());
                     }
                 });
     }

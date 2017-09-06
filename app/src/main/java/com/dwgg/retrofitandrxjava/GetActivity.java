@@ -14,17 +14,17 @@ import com.dwgg.retrofitandrxjava.utils.Tools;
 import com.dwgg.retrofitandrxjava.utils.ViewUtil;
 import com.dwgg.retrofitandrxjava.vmdata.GetVM;
 
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.schedulers.Schedulers;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 
 public class GetActivity extends AppCompatActivity implements ClickListener {
 
     private ActivityGetBinding binding;
     private GetVM vmData;
-    Subscription subscription;
+    Disposable disposable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,31 +45,26 @@ public class GetActivity extends AppCompatActivity implements ClickListener {
     public void onClick(View view) {
         vmData.clear();
 
-        subscription = ServiceGenerator.createService(GitHubService.class)
+        disposable = ServiceGenerator.createService(GitHubService.class)
                 .getUser(ViewUtil.getEditText(binding.username))
                 .subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Action0() {
+                .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
-                    public void call() {
+                    public void accept(Disposable disposable) throws Exception {
                         Tools.toast(GetActivity.this, "loading");
                     }
                 })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<GitHubUser>() {
+                .subscribe(new Consumer<GitHubUser>() {
                     @Override
-                    public void onCompleted() {
-                        Tools.toast(GetActivity.this, "over.");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Tools.toast(GetActivity.this, e.getMessage());
-                    }
-
-                    @Override
-                    public void onNext(GitHubUser gitHubUser) {
+                    public void accept(GitHubUser gitHubUser) throws Exception {
                         vmData.setText(gitHubUser.toString());
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Tools.toast(GetActivity.this, throwable.getMessage());
                     }
                 });
 
@@ -77,8 +72,8 @@ public class GetActivity extends AppCompatActivity implements ClickListener {
 
     @Override
     protected void onDestroy() {
-        if (subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+        if (disposable != null && !disposable.isDisposed()) {
+            disposable.dispose();
         }
         super.onDestroy();
     }

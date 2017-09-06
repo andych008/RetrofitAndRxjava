@@ -4,8 +4,7 @@ import com.dwgg.retrofitandrxjava.api.entity.GitHubUser;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
-import rx.Observable;
-
+import io.reactivex.Observable;
 
 public interface GitHubService {
     @GET("users/{username}")

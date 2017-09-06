@@ -52,27 +52,21 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-
-
     // Android dependencies.
     compile rootProject.ext.supportV7_appcompat
-
     // Square dependencies.
     compile rootProject.ext.retrofit
     compile rootProject.ext.retrofit_converterGson
     compile rootProject.ext.retrofit_adapterRxjava
     compile rootProject.ext.okhttp3_logging
-
     // Rx dependencies
     compile rootProject.ext.rxlifecycle_components
 
     // FB
     compile rootProject.ext.stetho
     compile rootProject.ext.stetho_ok
-
     // Third-party dependencies.
     compile rootProject.ext.timber
-
 }

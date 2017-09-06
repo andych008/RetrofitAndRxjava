@@ -3,11 +3,14 @@ package com.dwgg.retrofitandrxjava.utils;
 
 import android.content.Context;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -29,7 +32,7 @@ public class RxUtils {
      * 一般写在rx操作流的最后，subscribe()之前。
      */
     @SuppressWarnings("unchecked")
-    public static <T> Observable.Transformer<T, T> showLoading(final ILoading view) {
+    public static <T> ObservableTransformer<T, T> showLoading(final ILoading view) {
         return showLoading(view, null);
     }
 
@@ -38,14 +41,14 @@ public class RxUtils {
      * 一般写在rx操作流的最后，subscribe()之前。
      */
     @SuppressWarnings("unchecked")
-    public static <T> Observable.Transformer<T, T> showLoading(final ILoading loading, final String tip) {
-        return new Observable.Transformer<T, T>() {
+    public static <T> ObservableTransformer<T, T> showLoading(final ILoading loading, final String tip) {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public Observable<T> call(Observable<T> observable) {
-                return observable
-                        .doOnSubscribe(new Action0() {
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream
+                        .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
-                            public void call() {
+                            public void accept(Disposable disposable) throws Exception {
                                 if (tip == null) {
                                     loading.showLoading("loading");
                                 } else {
@@ -55,9 +58,9 @@ public class RxUtils {
                         })
                         .subscribeOn(AndroidSchedulers.mainThread())
                         .observeOn(AndroidSchedulers.mainThread())
-                        .doOnTerminate(new Action0() {
+                        .doOnTerminate(new Action() {
                             @Override
-                            public void call() {
+                            public void run() throws Exception {
                                 loading.hideLoading();
                             }
                         });
@@ -65,19 +68,19 @@ public class RxUtils {
         };
     }
 
-    public static <T> Observable.Transformer<T, T> validateGitHubResponse(final Context context) {
-        return new Observable.Transformer<T, T>() {
+    public static <T> ObservableTransformer<T, T> validateGitHubResponse(final Context context) {
+        return new ObservableTransformer<T, T>() {
             @Override
-            public Observable<T> call(Observable<T> observable) {
-                return observable.observeOn(Schedulers.io()).doOnError(new Action1<Throwable>() {
+            public ObservableSource<T> apply(Observable<T> upstream) {
+                return upstream.observeOn(Schedulers.io()).doOnError(new Consumer<Throwable>() {
                     @Override
-                    public void call(Throwable throwable) {
-                        Timber.d("log : %s", Thread.currentThread().getName());
-                        Timber.e(throwable, throwable.getMessage());
+                    public void accept(Throwable throwable) throws Exception {
+                            Timber.d("log : %s", Thread.currentThread().getName());
+                            Timber.e(throwable, throwable.getMessage());
                     }
-                }).observeOn(AndroidSchedulers.mainThread()).doOnError(new Action1<Throwable>() {
+                }).observeOn(AndroidSchedulers.mainThread()).doOnError(new Consumer<Throwable>() {
                     @Override
-                    public void call(Throwable throwable) {
+                    public void accept(Throwable throwable) throws Exception {
                         Timber.d("toast : %s", Thread.currentThread().getName());
                         Tools.toast(context, throwable.getMessage());
                     }
